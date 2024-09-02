@@ -86,7 +86,7 @@ var PdfTeXEngine = /** @class */ (function () {
                         }
                         this.latexWorkerStatus = EngineStatus.Init;
                         return [4 /*yield*/, new Promise(function (resolve, reject) {
-                                _this.latexWorker = new Worker(ENGINE_PATH);
+                                _this.latexWorker = new Worker("https://cdn.jsdelivr.net/gh/Sean1572/swifttex_release@latest/swiftlatex/PdfTeXEngine.js");
                                 _this.latexWorker.onmessage = function (ev) {
                                     var data = ev['data'];
                                     var cmd = data['result'];
