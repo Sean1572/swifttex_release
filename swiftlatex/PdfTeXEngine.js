@@ -65,7 +65,7 @@ var EngineStatus;
 // Shout out to https://stackoverflow.com/questions/21913673/execute-web-worker-from-different-origin/62914052#62914052
 // The script there simply posts back an "Hello" message
 // Obviously cross-origin here
-const cross_origin_script_url = "https://cdn.jsdelivr.net/gh/Sean1572/swifttex_release@0.0.3/swiftlatex/swiftlatexpdftex.js";
+const cross_origin_script_url = "https://cdn.jsdelivr.net/gh/Sean1572/swifttex_release@0.0.4/swiftlatex/swiftlatexpdftex.js";
 
 const worker_url = getWorkerURL( cross_origin_script_url );
 // const worker = new Worker( worker_url );
