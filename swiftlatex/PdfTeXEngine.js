@@ -80,7 +80,7 @@ var EngineStatus;
 //     return URL.createObjectURL( new Blob( [ content ], { type: "text/javascript" } ) );
 // }
 
-var ENGINE_PATH = 'swiftlatexpdftex.js';
+var ENGINE_PATH = './swiftlatexpdftex.js';
 var CompileResult = /** @class */ (function () {
     function CompileResult() {
         this.pdf = undefined;
