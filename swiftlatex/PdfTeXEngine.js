@@ -91,7 +91,7 @@ var CompileResult = /** @class */ (function () {
 }());
 exports.CompileResult = CompileResult;
 var PdfTeXEngine = /** @class */ (function () {
-    function PdfTeXEngine(ENGINE_PATH = './swiftlatexpdftex.js') {
+    function PdfTeXEngine(ENGINE_PATH) {
         this.latexWorker = undefined;
         this.latexWorkerStatus = EngineStatus.Init;
         this.ENGINE_PATH = ENGINE_PATH
