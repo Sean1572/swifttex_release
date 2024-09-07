@@ -126,6 +126,7 @@ var PdfTeXEngine = /** @class */ (function () {
                                         reject();
                                     }
                                 };
+                                _this.latexWorker.run()
                             })];
                     case 1:
                         _a.sent();
