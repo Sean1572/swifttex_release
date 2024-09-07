@@ -194,7 +194,7 @@ var PdfTeXEngine = /** @class */ (function () {
                         this.checkEngineStatus();
                         this.latexWorkerStatus = EngineStatus.Busy;
                         return [4 /*yield*/, new Promise(function (resolve, reject) {
-                                _this.latexWorker.onmessage = function (ev) {
+                                _this.latexWorker.onmessage_out = function (ev) {
                                     var data = ev['data'];
                                     var cmd = data['cmd'];
                                     if (cmd !== "compile")
