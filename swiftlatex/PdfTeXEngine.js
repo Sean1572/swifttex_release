@@ -116,7 +116,7 @@ var PdfTeXEngine = /** @class */ (function () {
                                 // const baseUrl = new URL(currentScriptUrl).origin;
                                 const workerScriptUrl = _this.ENGINE_PATH
                                 console.log("create worker", workerScriptUrl)
-                                _this.latexWorker = new Worker("https://cdn.jsdelivr.net/gh/Sean1572/swifttex_release@v0.6.0-beta.16/swiftlatex/swiftlatexpdftex.js");
+                                _this.latexWorker = new Worker(_this.ENGINE_PATH);
                                 console.log("made worker")
                                 _this.latexWorker.addEventListener("message", function test(ev) {
                                     console.log("OUTSIDE WORKER", ev)

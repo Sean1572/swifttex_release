@@ -757,7 +757,8 @@ function getBinary(file) {
 function getBinaryPromise() {
     if (!wasmBinary && (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER)) {
         if (typeof fetch === "function" && !isFileURI(wasmBinaryFile)) {
-            return fetch(wasmBinaryFile, { credentials: "same-origin" })
+            return fetch(wasmBinaryFile //, { credentials: "same-origin" }
+            )
                 .then(function (response) {
                     if (!response["ok"]) {
                         throw "failed to load wasm binary file at '" + wasmBinaryFile + "'";
