@@ -1,33 +1,20 @@
-#Thank you chatGPT
-name: Update dev Tag
-
+name: Auto Tag my Application
 on:
   push:
     branches:
-      - main  # Or any branch you want to trigger the action on
-
+      - main
 jobs:
-  update-dev-tag:
+  Patch:
+    runs-on: ubuntu-latest
     permissions:
       contents: write
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Delete existing 'dev' tag locally if exists
-        run: |
-          if git rev-parse dev >/dev/null 2>&1; then
-            git tag -d dev
-          fi
-
-      - name: Delete 'dev' tag remotely if exists
-        run: |
-          if git ls-remote --tags origin | grep -q "refs/tags/dev"; then
-            git push origin :refs/tags/dev
-          fi
-
-      - name: Create new 'dev' tag on the dev commit
-        run: |
-          git tag dev
-          git push origin dev
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+    - name: Minor version for each merge
+      id: AutoTagger
+      uses: anothrNick/github-tag-action@1.36.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
