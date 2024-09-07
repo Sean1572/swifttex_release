@@ -110,8 +110,9 @@ var PdfTeXEngine = /** @class */ (function () {
                         this.latexWorkerStatus = EngineStatus.Init;
                         return [4 /*yield*/, new Promise(function (resolve, reject) {
                                 
-                                const scriptUrl = new URL(import.meta.url);
-                                const workerScriptUrl = `${scriptUrl.origin}/_this.ENGINE_PATH`
+                                const currentScriptUrl = document.currentScript.src;
+                                const baseUrl = new URL(currentScriptUrl).origin;
+                                const workerScriptUrl = `${baseUrl}/_this.ENGINE_PATH`
                                 console.log("create worker", workerScriptUrl)
                                 _this.latexWorker = new Worker(workerScriptUrl);
                                 console.log("made worker")
