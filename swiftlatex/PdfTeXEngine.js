@@ -62,25 +62,25 @@ var EngineStatus;
 })(EngineStatus = exports.EngineStatus || (exports.EngineStatus = {}));
 
 
-// Shout out to https://stackoverflow.com/questions/21913673/execute-web-worker-from-different-origin/62914052#62914052
-// The script there simply posts back an "Hello" message
-// Obviously cross-origin here
-const cross_origin_script_url = "https://cdn.jsdelivr.net/gh/Sean1572/swifttex_release@0.0.5/swiftlatex/swiftlatexpdftex.js";
+// // Shout out to https://stackoverflow.com/questions/21913673/execute-web-worker-from-different-origin/62914052#62914052
+// // The script there simply posts back an "Hello" message
+// // Obviously cross-origin here
+// const cross_origin_script_url = "https://cdn.jsdelivr.net/gh/Sean1572/swifttex_release@0.0.5/swiftlatex/swiftlatexpdftex.js";
 
-const worker_url = getWorkerURL( cross_origin_script_url );
-// const worker = new Worker( worker_url );
-// worker.onmessage = (evt) => console.log( evt.data );
-// URL.revokeObjectURL( worker_url );
+// const worker_url = getWorkerURL( cross_origin_script_url );
+// // const worker = new Worker( worker_url );
+// // worker.onmessage = (evt) => console.log( evt.data );
+// // URL.revokeObjectURL( worker_url );
 
-// Returns a blob:// URL which points
-// to a javascript file which will call
-// importScripts with the given URL
-function getWorkerURL( url ) {
-    const content = `importScripts( "${ url }" );`;
-    return URL.createObjectURL( new Blob( [ content ], { type: "text/javascript" } ) );
-}
+// // Returns a blob:// URL which points
+// // to a javascript file which will call
+// // importScripts with the given URL
+// function getWorkerURL( url ) {
+//     const content = `importScripts( "${ url }" );`;
+//     return URL.createObjectURL( new Blob( [ content ], { type: "text/javascript" } ) );
+// }
 
-var ENGINE_PATH = worker_url //#'swiftlatexpdftex.js';
+var ENGINE_PATH = 'swiftlatexpdftex.js';
 var CompileResult = /** @class */ (function () {
     function CompileResult() {
         this.pdf = undefined;
