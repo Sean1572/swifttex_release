@@ -1,20 +1,32 @@
-name: Auto Tag my Application
+name: Update Latest Tag
+
 on:
   push:
     branches:
-      - main
+      - main  # Or any branch you want to trigger the action on
+
 jobs:
-  Patch:
-    runs-on: ubuntu-latest
+  update-latest-tag:
     permissions:
       contents: write
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: '0'
-    - name: Minor version for each merge
-      id: AutoTagger
-      uses: anothrNick/github-tag-action@1.36.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        CUSTOM_TAG : "latest"
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Delete existing 'latest' tag locally if exists
+        run: |
+          if git rev-parse latest >/dev/null 2>&1; then
+            git tag -d latest
+          fi
+
+      - name: Delete 'latest' tag remotely if exists
+        run: |
+          if git ls-remote --tags origin | grep -q "refs/tags/latest"; then
+            git push origin :refs/tags/latest
+          fi
+
+      - name: Create new 'latest' tag on the latest commit
+        run: |
+          git tag latest
+          git push origin latest
