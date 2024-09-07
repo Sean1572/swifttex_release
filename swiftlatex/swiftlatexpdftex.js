@@ -803,6 +803,8 @@ function createWasm() {
         console.log("testing inside worker")
         if (!wasmBinary && typeof WebAssembly.instantiateStreaming === "function" && !isDataURI(wasmBinaryFile) && !isFileURI(wasmBinaryFile) && typeof fetch === "function") {
             return fetch(wasmBinaryFile, { credentials: "same-origin" }).then(function (response) {
+                console.log("got wasm")
+                console.log(response)
                 var result = WebAssembly.instantiateStreaming(response, info);
                 return result.then(receiveInstantiationResult, function (reason) {
                     err("wasm streaming compile failed: " + reason);
