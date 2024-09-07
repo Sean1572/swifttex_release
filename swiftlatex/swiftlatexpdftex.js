@@ -45,7 +45,7 @@ function prepareExecutionContext() {
     FS.chdir(WORKROOT);
 }
 Module["postRun"] = function () {
-    self.postMessage({ result: "ok" });
+    self.postMessage({ result: "ok", location: "from worker" });
     self.initmem = dumpHeapMemory();
 };
 function cleanDir(dir) {
