@@ -110,7 +110,10 @@ var PdfTeXEngine = /** @class */ (function () {
                         this.latexWorkerStatus = EngineStatus.Init;
                         return [4 /*yield*/, new Promise(function (resolve, reject) {
                                 console.log("create worker", _this.ENGINE_PATH)
-                                _this.latexWorker = new Worker(_this.ENGINE_PATH, { credentials: "same-origin" });
+                                const scriptUrl = new URL(import.meta.url);
+                                const workerScriptUrl = `${scriptUrl.origin}/_this.ENGINE_PATH`
+
+                                _this.latexWorker = new Worker(workerScriptUrl);
                                 console.log("made worker")
                                 _this.latexWorker.addEventListener("message", function test(ev) {
                                     console.log("OUTSIDE WORKER", ev)
