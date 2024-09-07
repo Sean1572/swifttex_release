@@ -164,7 +164,6 @@ self.onmessage  = function (ev) {
         console.log("start running")
         console.log(self.latexWorkerStatus)
         console.log(self.console.log(self.latexWorkerStatus))
-        self.onmessage_out(ev)
         return
     }
     console.log("omgessage")
@@ -666,7 +665,7 @@ function preMain() {
 function exitRuntime() {
     runtimeExited = true;
 }
-function postRun() {
+async function postRun() {
     if (Module["postRun"]) {
         if (typeof Module["postRun"] == "function") Module["postRun"] = [Module["postRun"]];
         while (Module["postRun"].length) {
