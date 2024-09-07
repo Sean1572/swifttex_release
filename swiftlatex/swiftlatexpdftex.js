@@ -155,7 +155,7 @@ function setTexliveEndpoint(url) {
         self.texlive_endpoint = url;
     }
 }
-self["onmessage"] = function (ev) {
+self.onmessage  = function (ev) {
     console.log(ev["data"])
     console.log(ev["data"]["result"])
     console.log(ev["data"]["result"] == "ok")
