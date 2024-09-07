@@ -157,10 +157,10 @@ function setTexliveEndpoint(url) {
 }
 self["onmessage"] = function (ev) {
     console.log("omgessage")
-    console.log(data)
-    console.log(cmd)
     let data = ev["data"];
     let cmd = data["cmd"];
+    console.log(data)
+    console.log(cmd)
     if (cmd === "compilelatex") {
         compileLaTeXRoutine();
     } else if (cmd === "compileformat") {
@@ -809,6 +809,7 @@ function createWasm() {
                 console.log("got wasm")
                 console.log(response)
                 var result = WebAssembly.instantiateStreaming(response, info);
+                console.log(result)
                 return result.then(receiveInstantiationResult, function (reason) {
                     err("wasm streaming compile failed: " + reason);
                     err("falling back to ArrayBuffer instantiation");
