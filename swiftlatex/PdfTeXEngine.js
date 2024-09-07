@@ -96,6 +96,7 @@ var PdfTeXEngine = /** @class */ (function () {
         this.latexWorkerStatus = EngineStatus.Init;
     }
     PdfTeXEngine.prototype.loadEngine = function () {
+        console.log("start engine")
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
@@ -126,7 +127,7 @@ var PdfTeXEngine = /** @class */ (function () {
                                         reject();
                                     }
                                 };
-                                _this.latexWorker.run()
+                                //_this.latexWorker.run()
                             })];
                     case 1:
                         _a.sent();
