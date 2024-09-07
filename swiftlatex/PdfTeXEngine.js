@@ -109,6 +109,9 @@ var PdfTeXEngine = /** @class */ (function () {
                                 console.log("create worker")
                                 _this.latexWorker = new Worker(ENGINE_PATH);
                                 console.log("made worker")
+                                _this.latexWorker.addEventListener("message", function test(ev) {
+                                    console.log("OUTSIDE WORKER", ev)
+                                })
                                 console.log(_this.latexWorker.onmessage)
                                 _this.latexWorker.onmessage = function (ev) {
                                     console.log("outside worker", ev)
