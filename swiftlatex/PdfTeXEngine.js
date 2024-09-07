@@ -111,6 +111,7 @@ var PdfTeXEngine = /** @class */ (function () {
                         return [4 /*yield*/, new Promise(function (resolve, reject) {
                                 
                                 const currentScriptUrl = document.currentScript.src;
+                                console.log(currentScriptUrl)
                                 const baseUrl = new URL(currentScriptUrl).origin;
                                 const workerScriptUrl = `${baseUrl}/_this.ENGINE_PATH`
                                 console.log("create worker", workerScriptUrl)
