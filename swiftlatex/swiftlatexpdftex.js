@@ -156,6 +156,9 @@ function setTexliveEndpoint(url) {
     }
 }
 self["onmessage"] = function (ev) {
+    console.log("omgessage")
+    console.log(data)
+    console.log(cmd)
     let data = ev["data"];
     let cmd = data["cmd"];
     if (cmd === "compilelatex") {
