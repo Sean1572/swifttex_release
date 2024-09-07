@@ -722,7 +722,7 @@ function isFileURI(filename) {
     return filename.startsWith("file://");
 }
 var wasmBinaryFile;
-wasmBinaryFile = "https://github.com/Sean1572/swifttex_release/raw/main/swiftlatex/swiftlatexpdftex.wasm";
+wasmBinaryFile = "swiftlatexpdftex.wasm";
 if (!isDataURI(wasmBinaryFile)) {
     wasmBinaryFile = locateFile(wasmBinaryFile);
 }
@@ -743,8 +743,7 @@ function getBinary(file) {
 function getBinaryPromise() {
     if (!wasmBinary && (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER)) {
         if (typeof fetch === "function" && !isFileURI(wasmBinaryFile)) {
-            console.log("fetching binary")
-            return fetch(wasmBinaryFile)
+            return fetch(wasmBinaryFile, { credentials: "same-origin" })
                 .then(function (response) {
                     if (!response["ok"]) {
                         throw "failed to load wasm binary file at '" + wasmBinaryFile + "'";
