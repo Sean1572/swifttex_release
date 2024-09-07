@@ -80,7 +80,7 @@ var EngineStatus;
 //     return URL.createObjectURL( new Blob( [ content ], { type: "text/javascript" } ) );
 // }
 
-var ENGINE_PATH = './swiftlatexpdftex.js';
+// var ENGINE_PATH = './swiftlatexpdftex.js';
 var CompileResult = /** @class */ (function () {
     function CompileResult() {
         this.pdf = undefined;
@@ -91,9 +91,10 @@ var CompileResult = /** @class */ (function () {
 }());
 exports.CompileResult = CompileResult;
 var PdfTeXEngine = /** @class */ (function () {
-    function PdfTeXEngine() {
+    function PdfTeXEngine(ENGINE_PATH = './swiftlatexpdftex.js') {
         this.latexWorker = undefined;
         this.latexWorkerStatus = EngineStatus.Init;
+        this.ENGINE_PATH = ENGINE_PATH
     }
     PdfTeXEngine.prototype.loadEngine = function () {
         console.log("start engine")
@@ -108,7 +109,7 @@ var PdfTeXEngine = /** @class */ (function () {
                         this.latexWorkerStatus = EngineStatus.Init;
                         return [4 /*yield*/, new Promise(function (resolve, reject) {
                                 console.log("create worker")
-                                _this.latexWorker = new Worker(ENGINE_PATH);
+                                _this.latexWorker = new Worker(this.ENGINE_PATH);
                                 console.log("made worker")
                                 _this.latexWorker.addEventListener("message", function test(ev) {
                                     console.log("OUTSIDE WORKER", ev)
