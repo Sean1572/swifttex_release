@@ -159,6 +159,7 @@ self["onmessage"] = function (ev) {
     console.log("omgessage")
     let data = ev["data"];
     let cmd = data["cmd"];
+    console.log(ev)
     console.log(data)
     console.log(cmd)
     if (cmd === "compilelatex") {
