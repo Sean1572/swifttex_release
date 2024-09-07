@@ -156,7 +156,8 @@ function setTexliveEndpoint(url) {
     }
 }
 self["onmessage"] = function (ev) {
-    if (ev["result"] === "ok") {
+    console.log(ev["data"])
+    if (ev["data"]["result"] === "ok") {
         console.log("start running")
         console.log(self.latexWorkerStatus)
         console.log(self.console.log(self.latexWorkerStatus))
