@@ -1,5 +1,5 @@
 #Thank you chatGPT
-name: Update Latest Tag
+name: Update dev Tag
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
       - main  # Or any branch you want to trigger the action on
 
 jobs:
-  update-latest-tag:
+  update-dev-tag:
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -15,19 +15,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Delete existing 'latest' tag locally if exists
+      - name: Delete existing 'dev' tag locally if exists
         run: |
-          if git rev-parse latest >/dev/null 2>&1; then
-            git tag -d latest
+          if git rev-parse dev >/dev/null 2>&1; then
+            git tag -d dev
           fi
 
-      - name: Delete 'latest' tag remotely if exists
+      - name: Delete 'dev' tag remotely if exists
         run: |
-          if git ls-remote --tags origin | grep -q "refs/tags/latest"; then
-            git push origin :refs/tags/latest
+          if git ls-remote --tags origin | grep -q "refs/tags/dev"; then
+            git push origin :refs/tags/dev
           fi
 
-      - name: Create new 'latest' tag on the latest commit
+      - name: Create new 'dev' tag on the dev commit
         run: |
-          git tag latest
-          git push origin latest
+          git tag dev
+          git push origin dev
