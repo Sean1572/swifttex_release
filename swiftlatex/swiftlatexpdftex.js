@@ -814,9 +814,9 @@ function createWasm() {
             });
     }
     function instantiateAsync() {
-        console.log("testing inside worker")
+        console.log("testing inside worker", wasmBinaryFile)
         if (!wasmBinary && typeof WebAssembly.instantiateStreaming === "function" && !isDataURI(wasmBinaryFile) && !isFileURI(wasmBinaryFile) && typeof fetch === "function") {
-            return fetch(wasmBinaryFile, { credentials: "same-origin" }).then(function (response) {
+            return fetch(wasmBinaryFile).then(function (response) {
                 console.log("got wasm")
                 console.log(response)
                 var result = WebAssembly.instantiateStreaming(response, info);
