@@ -1,8 +1,7 @@
 name: Auto Tag my Application
 on:
   push:
-    branches:
-      - main
+
 jobs:
   Patch:
     runs-on: ubuntu-latest

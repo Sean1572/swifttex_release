@@ -45,7 +45,7 @@ function prepareExecutionContext() {
     FS.chdir(WORKROOT);
 }
 Module["postRun"] = function () {
-    self.postMessage({ result: "ok" });
+    self.postMessage({ result: "ok", location: "from worker" });
     self.initmem = dumpHeapMemory();
 };
 function cleanDir(dir) {
@@ -155,16 +155,19 @@ function setTexliveEndpoint(url) {
         self.texlive_endpoint = url;
     }
 }
-self["onmessage"] = function (ev) {
-    console.log("omgessage")
-    let data = ev["data"];
-
-    if (data["result"] === "ok") {
+self.onmessage  = function (ev) {
+    console.log(ev["data"])
+    console.log(ev["data"]["result"])
+    console.log(ev["data"]["result"] == "ok")
+    console.log(ev["data"]["result"] === "ok")
+    if (ev["data"]["result"] == "ok") {
         console.log("start running")
         console.log(self.latexWorkerStatus)
-        self.latexWorkerStatus = 2
+        console.log(self.console.log(self.latexWorkerStatus))
+        return
     }
-
+    console.log("omgessage")
+    let data = ev["data"];
     let cmd = data["cmd"];
     console.log(ev)
     console.log(data)
@@ -662,7 +665,7 @@ function preMain() {
 function exitRuntime() {
     runtimeExited = true;
 }
-function postRun() {
+async function postRun() {
     if (Module["postRun"]) {
         if (typeof Module["postRun"] == "function") Module["postRun"] = [Module["postRun"]];
         while (Module["postRun"].length) {
@@ -733,7 +736,7 @@ function isFileURI(filename) {
     return filename.startsWith("file://");
 }
 var wasmBinaryFile;
-wasmBinaryFile = "swiftlatexpdftex.wasm";
+wasmBinaryFile = "https://cdn.jsdelivr.net/gh/Sean1572/swifttex_release@v0.6.0-beta.23/swiftlatex/swiftlatexpdftex.wasm";
 if (!isDataURI(wasmBinaryFile)) {
     wasmBinaryFile = locateFile(wasmBinaryFile);
 }
@@ -754,7 +757,8 @@ function getBinary(file) {
 function getBinaryPromise() {
     if (!wasmBinary && (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER)) {
         if (typeof fetch === "function" && !isFileURI(wasmBinaryFile)) {
-            return fetch(wasmBinaryFile, { credentials: "same-origin" })
+            return fetch(wasmBinaryFile //, { credentials: "same-origin" }
+            )
                 .then(function (response) {
                     if (!response["ok"]) {
                         throw "failed to load wasm binary file at '" + wasmBinaryFile + "'";
@@ -813,7 +817,7 @@ function createWasm() {
     function instantiateAsync() {
         console.log("testing inside worker")
         if (!wasmBinary && typeof WebAssembly.instantiateStreaming === "function" && !isDataURI(wasmBinaryFile) && !isFileURI(wasmBinaryFile) && typeof fetch === "function") {
-            return fetch(wasmBinaryFile, { credentials: "same-origin" }).then(function (response) {
+            return fetch(wasmBinaryFile).then(function (response) { //, { credentials: "same-origin" }
                 console.log("got wasm")
                 console.log(response)
                 var result = WebAssembly.instantiateStreaming(response, info);
@@ -4034,4 +4038,4 @@ if (Module["preInit"]) {
 }
 var shouldRunNow = true;
 if (Module["noInitialRun"]) shouldRunNow = false;
-run();
+//run();
